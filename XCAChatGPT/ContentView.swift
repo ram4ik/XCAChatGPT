@@ -16,6 +16,21 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .onAppear {
+            Task {
+                let api = ChatGPTAPI(apiKey: Key.apiKey)
+                do {
+//                    let stream = try await api.sendMessageStream(text: "Who is James Bond")
+//                    for try await line in stream {
+//                        print(line)
+//                    }
+                    let text = try await api.sendMessage(text: "Who is James Bond?")
+                    print(text)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
